@@ -1,9 +1,7 @@
 <?php
-  if (file_exists("contacts.json")){
-    $contacts = json_decode(file_get_contents("contacts.json"),true);
-  }else{
-    $contacts=[];
-  }
+  require "database.php";
+
+  $contacts = $conn->query("select * from contacts");
 ?>
 
 
@@ -65,7 +63,7 @@
 
       <div class="row">
         <?php
-        if(count($contacts)== 0):
+        if($contacts->rowcount()== 0):
         ?>
         <div class="col-md-4 mx-auto">
             <div class="card card-body text-center">
